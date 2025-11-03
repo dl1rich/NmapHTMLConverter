@@ -18,7 +18,7 @@ Host Section
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/3c1f5606-2f08-4ce7-af61-13830342b241" />
 
 Scan Details  
-<img width="1214" height="1093" alt="image" src="https://github.com/user-attachments/assets/028b574b-324b-4264-981e-ece898adfbb6" />
+<img width="700"  alt="image" src="https://github.com/user-attachments/assets/028b574b-324b-4264-981e-ece898adfbb6" />
 </p>
 
 ## Features
