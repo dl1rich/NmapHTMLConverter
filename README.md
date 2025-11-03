@@ -2,8 +2,10 @@
 
 A modern, self-contained tool that converts Nmap XML scan results into beautiful, interactive HTML security reports.
 
-![Nmap HTML Converter](https://img.shields.io/badge/Go-1.19+-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+[![GitHub release](https://img.shields.io/github/v/release/dl1rich/NmapHTMLConverter)](https://github.com/dl1rich/NmapHTMLConverter/releases)
+[![Go Version](https://img.shields.io/badge/Go-1.19+-blue.svg)](https://go.dev/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Build Status](https://github.com/dl1rich/NmapHTMLConverter/workflows/Build%20and%20Test/badge.svg)](https://github.com/dl1rich/NmapHTMLConverter/actions)
 
 ## Features
 
@@ -30,7 +32,7 @@ A modern, self-contained tool that converts Nmap XML scan results into beautiful
 
 ### Download Pre-built Binary
 
-Download the latest release for your platform from the [Releases](https://github.com/YourUsername/NmapHTMLConverter/releases) page:
+Download the latest release for your platform from the [Releases](https://github.com/dl1rich/NmapHTMLConverter/releases) page:
 
 - **Windows**: `nmapHTMLConverter.exe` (amd64) or `nmapHTMLConverter-arm64.exe` (arm64)
 - **Linux**: `nmapHTMLConverter-linux` (amd64) or `nmapHTMLConverter-linux-arm64` (arm64)
@@ -50,7 +52,7 @@ That's it! Your `nmap.html` report is ready to view in any browser.
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/dl1rich/NmapHTMLConverter.git
 cd NmapHTMLConverter
 
 # Build the executable
@@ -203,7 +205,7 @@ To create a new release with automated builds:
    - Create a new release with all binaries attached
    - Generate release notes from commits
 
-The release will appear at: `https://github.com/YourUsername/NmapHTMLConverter/releases`
+The release will appear at: `https://github.com/dl1rich/NmapHTMLConverter/releases`
 
 ## License
 

@@ -70,7 +70,7 @@ This repository includes automated CI/CD workflows for building and releasing th
 
 4. **Wait for automation:**
    - GitHub Actions will automatically build all binaries
-   - Release will be created at: `https://github.com/YourUsername/NmapHTMLConverter/releases`
+   - Release will be created at: `https://github.com/dl1rich/NmapHTMLConverter/releases`
    - All 6 platform binaries will be attached
 
 ### Version Tag Format
