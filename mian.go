@@ -62,15 +62,21 @@ type Ports struct {
 }
 
 type Port struct {
-	Protocol string  `xml:"protocol,attr"`
-	PortId   int     `xml:"portid,attr"`
-	State    State   `xml:"state"`
-	Service  Service `xml:"service"`
+	Protocol string   `xml:"protocol,attr"`
+	PortId   int      `xml:"portid,attr"`
+	State    State    `xml:"state"`
+	Service  Service  `xml:"service"`
+	Scripts  []Script `xml:"script"`
 }
 
 type State struct {
 	State  string `xml:"state,attr"`
 	Reason string `xml:"reason,attr"`
+}
+
+type Script struct {
+	ID     string `xml:"id,attr"`
+	Output string `xml:"output,attr"`
 }
 
 type Service struct {
@@ -473,8 +479,16 @@ const defaultTemplate = `{{define "header"}}
           </thead>
           <tbody>
             {{range .Ports.Ports}}
-            <tr data-port="{{.PortId}}" data-service="{{.Service.Name}}" onclick="showPortDetails(this)">
-              <td class="p-port">{{.PortId}}</td>
+            <tr data-port="{{.PortId}}" 
+                data-service="{{.Service.Name}}" 
+                data-product="{{.Service.Product}}" 
+                data-version="{{.Service.Version}}"
+                data-extras="{{.Service.Extras}}"
+                data-state="{{.State.State}}"
+                data-reason="{{.State.Reason}}"
+                data-has-scripts="{{if .Scripts}}true{{else}}false{{end}}"
+                onclick="showPortDetails(this)">
+              <td class="p-port">{{.PortId}}{{if .Scripts}}<span style="margin-left:4px;font-size:10px;color:var(--accent)">📋</span>{{end}}</td>
               <td class="p-proto">{{.Protocol}}</td>
               <td class="p-state" data-state="{{.State.State}}">
                 {{if eq .State.State "open"}}🟢{{else if eq .State.State "closed"}}🔴{{else}}🟡{{end}} {{.State.State}}
@@ -496,6 +510,20 @@ const defaultTemplate = `{{define "header"}}
           </tbody>
         </table>
       </div>
+      
+      <!-- Hidden script data for JavaScript access -->
+      <div class="port-scripts-data" style="display:none;">
+        {{range .Ports.Ports}}
+        {{if .Scripts}}
+        <div data-port="{{.PortId}}">
+          {{range .Scripts}}
+          <div class="script-item" data-id="{{.ID}}">{{.Output}}</div>
+          {{end}}
+        </div>
+        {{end}}
+        {{end}}
+      </div>
+      
       {{else}}
       <p class="text-center muted">No open ports detected</p>
       {{end}}
@@ -773,7 +801,7 @@ const defaultTemplate = `{{define "header"}}
           if(exportDropdown) exportDropdown.style.display = 'none';
         });
 
-        // Copy IP:PORT to clipboard when clicking port row
+        // Show port details modal with script output
         window.showPortDetails = function(row) {
           const port = row.dataset.port;
           const hostCard = row.closest('.host-card');
@@ -788,14 +816,74 @@ const defaultTemplate = `{{define "header"}}
             notification.textContent = ` + "`" + `✓ Copied: ${target}` + "`" + `;
             document.body.appendChild(notification);
             
-            // Remove after 2 seconds
             setTimeout(() => {
               notification.style.animation = 'slideOut 0.3s ease';
               setTimeout(() => notification.remove(), 300);
             }, 2000);
           }).catch(err => {
             console.error('Failed to copy:', err);
-            alert(` + "`" + `Failed to copy ${target}` + "`" + `);
+          });
+          
+          // Check if port has script data
+          const hasScripts = row.dataset.hasScripts === 'true';
+          if (!hasScripts) return; // No modal needed if no scripts
+          
+          // Find script data for this port
+          const scriptContainer = hostCard.querySelector(` + "`" + `.port-scripts-data [data-port="${port}"]` + "`" + `);
+          if (!scriptContainer) return;
+          
+          const scripts = scriptContainer.querySelectorAll('.script-item');
+          if (scripts.length === 0) return;
+          
+          // Build script output HTML
+          let scriptsHTML = '';
+          scripts.forEach(script => {
+            const scriptId = script.dataset.id;
+            const output = script.textContent;
+            scriptsHTML += ` + "`" + `
+              <div style="margin-bottom:16px;">
+                <div style="font-weight:600;color:var(--accent);margin-bottom:6px;font-size:13px;">
+                  📋 ${scriptId}
+                </div>
+                <pre style="background:var(--glass);padding:12px;border-radius:6px;overflow-x:auto;font-size:12px;line-height:1.5;margin:0;border:1px solid var(--border);white-space:pre-wrap;word-wrap:break-word;">${output}</pre>
+              </div>
+            ` + "`" + `;
+          });
+          
+          // Create modal
+          const modal = document.createElement('div');
+          modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:10000;padding:20px;animation:fadeIn 0.2s ease;';
+          modal.innerHTML = ` + "`" + `
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;max-width:800px;width:100%;max-height:80vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 32px rgba(0,0,0,0.4);">
+              <div style="padding:20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+                <h3 style="margin:0;font-size:18px;">
+                  🔍 Port ${port} Details - ${ip}:${port}
+                </h3>
+                <button onclick="this.closest('div[style*=fixed]').remove()" style="background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer;padding:0;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:all 0.2s;" onmouseover="this.style.background='var(--glass)';this.style.color='var(--text)'" onmouseout="this.style.background='none';this.style.color='var(--muted)'">×</button>
+              </div>
+              <div style="padding:20px;overflow-y:auto;">
+                <div style="margin-bottom:16px;padding:12px;background:var(--glass);border-radius:8px;border:1px solid var(--border);">
+                  <div style="display:grid;grid-template-columns:120px 1fr;gap:8px;font-size:13px;">
+                    <div style="color:var(--muted);">Service:</div>
+                    <div style="font-weight:600;">${row.dataset.service || 'Unknown'}</div>
+                    <div style="color:var(--muted);">Product:</div>
+                    <div>${row.dataset.product || '-'}${row.dataset.version ? ' ' + row.dataset.version : ''}</div>
+                    <div style="color:var(--muted);">State:</div>
+                    <div style="color:var(--success);font-weight:600;">${row.dataset.state}</div>
+                    ${row.dataset.extras ? ` + "`" + `<div style="color:var(--muted);">Extra Info:</div><div>${row.dataset.extras}</div>` + "`" + ` : ''}
+                  </div>
+                </div>
+                <h4 style="margin:0 0 12px 0;font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;">Script Output</h4>
+                ${scriptsHTML}
+              </div>
+            </div>
+          ` + "`" + `;
+          
+          document.body.appendChild(modal);
+          
+          // Close on background click
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.remove();
           });
         };
 
@@ -971,6 +1059,12 @@ func main() {
 	}
 
 	flag.Parse()
+
+	// Show help if no arguments provided
+	if flag.NFlag() == 0 && xmlPath == "" {
+		flag.Usage()
+		os.Exit(0)
+	}
 
 	if showVersion {
 		fmt.Println("Nmap HTML Converter v1.0.0")
