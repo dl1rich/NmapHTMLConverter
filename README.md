@@ -7,20 +7,6 @@ A modern, self-contained tool that converts Nmap XML scan results into beautiful
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Build Status](https://github.com/dl1rich/NmapHTMLConverter/workflows/Build%20and%20Test/badge.svg)](https://github.com/dl1rich/NmapHTMLConverter/actions)
 
-## Screenshots
-
-Main  
-<p align="center">
-<img width="2117" height="1330" alt="image" src="https://github.com/user-attachments/assets/7f968503-b592-4a11-b237-7552f28214b4" />
-
-
-Host Section  
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/3c1f5606-2f08-4ce7-af61-13830342b241" />
-
-Scan Details  
-<img width="700"  alt="image" src="https://github.com/user-attachments/assets/028b574b-324b-4264-981e-ece898adfbb6" />
-</p>
-
 ## Features
 
 ✨ **Modern Design**
@@ -44,6 +30,19 @@ Scan Details
 - No external dependencies required
 - Custom CSS and template support for advanced users
 - Cross-platform compatibility
+
+## Screenshots
+
+Main  
+<p align="center">
+<img width="2117" height="1330" alt="image" src="https://github.com/user-attachments/assets/7f968503-b592-4a11-b237-7552f28214b4" />
+
+Host Section  
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/3c1f5606-2f08-4ce7-af61-13830342b241" />
+
+Scan Details  
+<img width="700"  alt="image" src="https://github.com/user-attachments/assets/028b574b-324b-4264-981e-ece898adfbb6" />
+</p>
 
 ## Quick Start
 
