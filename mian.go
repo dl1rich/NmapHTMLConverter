@@ -152,47 +152,48 @@ body::before{content:"";position:fixed;top:0;left:0;right:0;bottom:0;background:
 .summary-stats .pill:hover{background:var(--glass-strong);transform:translateY(-1px)}
 
 /* hosts grid */
-.hosts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:16px;margin-top:24px}
-.host-card{background:linear-gradient(145deg,rgba(255,255,255,0.02),rgba(255,255,255,0.04));border-radius:16px;padding:20px;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,0.3);backdrop-filter:blur(8px);transition:all 0.3s ease;position:relative;overflow:hidden}
+.hosts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(520px,1fr));gap:20px;margin-top:24px}
+.host-card{background:linear-gradient(145deg,rgba(255,255,255,0.02),rgba(255,255,255,0.04));border-radius:16px;padding:24px;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,0.3);backdrop-filter:blur(8px);transition:all 0.3s ease;position:relative;overflow:hidden}
 .host-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-2));opacity:0;transition:opacity 0.3s ease}
 .host-card:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.4);border-color:rgba(56,189,248,0.2)}
 .host-card:hover::before{opacity:1}
 .host-card[data-status="down"]{opacity:0.6;filter:grayscale(20%)}
-.host-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
-.host-title{display:flex;flex-direction:column;gap:8px;flex:1}
+.host-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;cursor:pointer;user-select:none;padding:4px;margin:-4px;border-radius:12px;transition:background 0.2s ease}
+.host-head:hover{background:rgba(56,189,248,0.05)}
+.host-title{display:flex;flex-direction:column;gap:10px;flex:1;pointer-events:none}
 .host-name{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
-.ip{font-family: "SF Mono",Menlo,"Monaco","Cascadia Code","Roboto Mono",Courier New,monospace;background:linear-gradient(135deg,#071a2b,#062033);padding:8px 12px;border-radius:10px;border:1px solid var(--border);font-size:14px;font-weight:600;letter-spacing:0.5px}
-.hostname{font-size:13px;color:var(--muted);font-weight:500}
-.host-badges{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.badge{padding:6px 10px;border-radius:20px;font-weight:600;background:var(--glass);font-size:12px;border:1px solid var(--border);transition:all 0.2s ease}
+.ip{font-family: "SF Mono",Menlo,"Monaco","Cascadia Code","Roboto Mono",Courier New,monospace;background:linear-gradient(135deg,#071a2b,#062033);padding:10px 14px;border-radius:10px;border:1px solid var(--border);font-size:15px;font-weight:600;letter-spacing:0.5px}
+.hostname{font-size:14px;color:var(--muted);font-weight:500}
+.host-badges{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.badge{padding:7px 12px;border-radius:20px;font-weight:600;background:var(--glass);font-size:12px;border:1px solid var(--border);transition:all 0.2s ease}
 .state-up{color:#10b981;background:linear-gradient(90deg, rgba(16,185,129,0.08), rgba(16,185,129,0.04));border-color:rgba(16,185,129,0.2)}
 .state-down{color:var(--danger);background:linear-gradient(90deg, rgba(251,113,133,0.08), rgba(251,113,133,0.04));border-color:rgba(251,113,133,0.2)}
 .ports-count{background:var(--glass-strong);color:var(--accent);border-color:rgba(56,189,248,0.2)}
 
 /* host body */
-.host-body{margin-top:16px;padding-top:16px;border-top:1px solid var(--border);animation:slideDown 0.3s ease-out}
-.host-meta{margin-bottom:16px}
-.host-meta dl{display:grid;grid-template-columns:100px 1fr;gap:8px 16px;margin:0;background:var(--glass);padding:12px;border-radius:10px;border:1px solid var(--border)}
+.host-body{margin-top:20px;padding-top:20px;border-top:1px solid var(--border);animation:slideDown 0.3s ease-out}
+.host-meta{margin-bottom:20px}
+.host-meta dl{display:grid;grid-template-columns:110px 1fr;gap:10px 20px;margin:0;background:var(--glass);padding:16px;border-radius:10px;border:1px solid var(--border)}
 .host-meta dt{color:var(--muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
-.host-meta dd{margin:0;font-family:"SF Mono",monospace;color:var(--text);word-break:break-word;font-size:13px}
-.host-meta code{background:rgba(56,189,248,0.1);color:var(--accent);padding:2px 6px;border-radius:4px;font-size:12px}
+.host-meta dd{margin:0;font-family:"SF Mono",monospace;color:var(--text);word-break:break-word;font-size:13px;line-height:1.5}
+.host-meta code{background:rgba(56,189,248,0.1);color:var(--accent);padding:3px 7px;border-radius:4px;font-size:12px}
 
 /* ports table */
 .ports-table-wrap{overflow:auto;border-radius:12px;background:var(--glass);padding:0;border:1px solid var(--border);backdrop-filter:blur(8px)}
-.ports-table{width:100%;border-collapse:collapse;font-size:14px;min-width:600px}
-.ports-table thead th{font-size:12px;text-align:left;padding:14px 18px;border-bottom:1px solid var(--border);color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;background:rgba(255,255,255,0.02);white-space:nowrap}
-.ports-table tbody td{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.03);transition:background 0.2s ease;vertical-align:top}
+.ports-table{width:100%;border-collapse:collapse;font-size:14px;min-width:650px}
+.ports-table thead th{font-size:12px;text-align:left;padding:16px 20px;border-bottom:1px solid var(--border);color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;background:rgba(255,255,255,0.02);white-space:nowrap}
+.ports-table tbody td{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.03);transition:background 0.2s ease;vertical-align:top}
 .ports-table tbody tr{cursor:pointer}
 .ports-table tbody tr:hover{background:rgba(56,189,248,0.08)}
 .ports-table tbody tr:last-child td{border-bottom:none}
-.p-port{font-weight:700;color:var(--accent);font-family:"SF Mono",monospace;min-width:80px}
-.p-proto{color:var(--muted);text-transform:uppercase;font-size:11px;font-weight:600;min-width:80px}
-.p-state{font-weight:600;min-width:100px}
+.p-port{font-weight:700;color:var(--accent);font-family:"SF Mono",monospace;min-width:90px;font-size:15px}
+.p-proto{color:var(--muted);text-transform:uppercase;font-size:11px;font-weight:600;min-width:90px}
+.p-state{font-weight:600;min-width:110px}
 .p-state[data-state="open"]{color:var(--success)}
 .p-state[data-state="closed"]{color:var(--danger)}
 .p-state[data-state="filtered"]{color:var(--warning)}
-.p-service{color:var(--text);font-weight:500;min-width:120px}
-.p-product{color:var(--muted);font-size:13px;line-height:1.4;max-width:300px;word-wrap:break-word}
+.p-service{color:var(--text);font-weight:500;min-width:130px}
+.p-product{color:var(--muted);font-size:13px;line-height:1.5;max-width:350px;word-wrap:break-word}
 
 /* footer */
 .footer{margin-top:40px;padding:20px;text-align:center;color:var(--muted);font-size:13px;background:var(--glass);border-radius:12px;border:1px solid var(--border)}
@@ -298,12 +299,14 @@ body::before{content:"";position:fixed;top:0;left:0;right:0;bottom:0;background:
   .search{width:100%}
   .hosts-grid{grid-template-columns:1fr}
   .ports-table{min-width:auto;font-size:12px}
-  .ports-table thead th, .ports-table tbody td{padding:8px 12px}
+  .ports-table thead th, .ports-table tbody td{padding:10px 14px}
 }
 
-@media (min-width:1400px){
-  .container{max-width:1400px}
-  .hosts-grid{grid-template-columns:repeat(auto-fill,minmax(600px,1fr))}
+@media (min-width:1500px){
+  .container{max-width:1500px}
+  .hosts-grid{grid-template-columns:repeat(auto-fill,minmax(650px,1fr))}
+  .host-card{padding:28px}
+  .ports-table{min-width:700px}
 }
 
 /* Print styles */
@@ -487,8 +490,8 @@ const defaultTemplate = `{{define "header"}}
                 data-state="{{.State.State}}"
                 data-reason="{{.State.Reason}}"
                 data-has-scripts="{{if .Scripts}}true{{else}}false{{end}}"
-                onclick="showPortDetails(this)">
-              <td class="p-port">{{.PortId}}{{if .Scripts}}<span style="margin-left:4px;font-size:10px;color:var(--accent)">📋</span>{{end}}</td>
+                onclick="showPortDetails(event, this)">
+              <td class="p-port" onclick="event.stopPropagation(); copyPortToClipboard(event, this)">{{.PortId}}{{if .Scripts}}<span style="margin-left:4px;font-size:10px;color:var(--accent)">📋</span>{{end}}</td>
               <td class="p-proto">{{.Protocol}}</td>
               <td class="p-state" data-state="{{.State.State}}">
                 {{if eq .State.State "open"}}🟢{{else if eq .State.State "closed"}}🔴{{else}}🟡{{end}} {{.State.State}}
@@ -708,10 +711,32 @@ const defaultTemplate = `{{define "header"}}
         });
 
         document.body.addEventListener('click', function(e){
+          // Toggle on button click
           if(e.target.matches('.toggle') || e.target.closest('.toggle')){
+            e.stopPropagation(); // Prevent host-head click from also firing
             const button = e.target.matches('.toggle') ? e.target : e.target.closest('.toggle');
             const card = button.closest('.host-card');
             const body = card.querySelector('.host-body');
+            const text = button.querySelector('.toggle-text');
+            const isHidden = body.hasAttribute('hidden');
+            
+            if(isHidden) {
+              body.removeAttribute('hidden');
+              text.textContent = 'Collapse';
+              button.setAttribute('aria-expanded', 'true');
+            } else {
+              body.setAttribute('hidden','');
+              text.textContent = 'Expand';
+              button.setAttribute('aria-expanded', 'false');
+            }
+          }
+          
+          // Toggle on header click
+          if(e.target.matches('.host-head') || e.target.closest('.host-head')){
+            const header = e.target.matches('.host-head') ? e.target : e.target.closest('.host-head');
+            const card = header.closest('.host-card');
+            const body = card.querySelector('.host-body');
+            const button = card.querySelector('.toggle');
             const text = button.querySelector('.toggle-text');
             const isHidden = body.hasAttribute('hidden');
             
@@ -801,8 +826,9 @@ const defaultTemplate = `{{define "header"}}
           if(exportDropdown) exportDropdown.style.display = 'none';
         });
 
-        // Show port details modal with script output
-        window.showPortDetails = function(row) {
+        // Copy IP:PORT to clipboard when clicking port number
+        window.copyPortToClipboard = function(event, portCell) {
+          const row = portCell.closest('tr');
           const port = row.dataset.port;
           const hostCard = row.closest('.host-card');
           const ip = hostCard.querySelector('.ip').textContent.trim();
@@ -823,6 +849,13 @@ const defaultTemplate = `{{define "header"}}
           }).catch(err => {
             console.error('Failed to copy:', err);
           });
+        };
+
+        // Show port details modal with script output
+        window.showPortDetails = function(event, row) {
+          const port = row.dataset.port;
+          const hostCard = row.closest('.host-card');
+          const ip = hostCard.querySelector('.ip').textContent.trim();
           
           // Check if port has script data
           const hasScripts = row.dataset.hasScripts === 'true';

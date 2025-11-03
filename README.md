@@ -27,9 +27,12 @@ Host Section
 🔍 **Enhanced Functionality**
 - Real-time search across hosts, ports, and services
 - Quick statistics overlay
+- Click port numbers to copy `IP:PORT` to clipboard for instant testing
+- Click port rows to view detailed nmap script output in modal
+- Clickable host headers for quick expand/collapse
 - Export scan summary to clipboard
-- Expandable/collapsible host details
 - Color-coded port states (🟢 open, 🔴 closed, 🟡 filtered)
+- Script output indicator (📋) for ports with additional scan data
 
 🚀 **Self-Contained**
 - Single executable with embedded CSS and templates
@@ -138,8 +141,12 @@ nmap --top-ports 1000 -oX quick-scan.xml target.com
 ### 🔍 **Interactive Features**
 - **Global Search**: Find hosts, ports, services, or any text instantly
 - **Quick Stats**: Overlay showing scan summary and metrics
-- **Expand/Collapse**: Toggle host details individually or in bulk
+- **Expand/Collapse**: Toggle host details individually or in bulk - click anywhere on the host header!
 - **Export Function**: Copy scan summary to clipboard for reports
+- **Port Interaction**:
+  - Click **port number** → Copies `IP:PORT` to clipboard (e.g., `10.40.18.20:22`)
+  - Click **anywhere else on row** → Opens detailed modal with nmap script output
+  - 📋 indicator shows ports with additional scan data (ssl-cert, http-methods, ssh-hostkey, etc.)
 
 ### 📊 **Data Presentation**
 - **Host Cards**: Clean, organized display of each scanned host
@@ -215,6 +222,23 @@ To create a new release with automated builds:
    - Generate release notes from commits
 
 The release will appear at: `https://github.com/dl1rich/NmapHTMLConverter/releases`
+
+## Note to self for retag (keep version 1.0.0 for now)
+
+```sh
+# Delete tag locally and remotely
+git tag -d v1.0.0
+git push origin :refs/tags/v1.0.0
+
+# Commit changes (if needed)
+git add .
+git commit -m "Your changes"
+git push
+
+# Recreate and push tag
+git tag -a v1.0.0 -m "Release message"
+git push origin v1.0.0
+```
 
 ## License
 
