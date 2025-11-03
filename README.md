@@ -7,6 +7,10 @@ A modern, self-contained tool that converts Nmap XML scan results into beautiful
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Build Status](https://github.com/dl1rich/NmapHTMLConverter/workflows/Build%20and%20Test/badge.svg)](https://github.com/dl1rich/NmapHTMLConverter/actions)
 
+## Screenshots
+
+<img width="2271" height="1330" alt="image" src="https://github.com/user-attachments/assets/80cd16e6-bc3c-4d9c-aaa3-f90e28c9059e" />
+
 ## Features
 
 ✨ **Modern Design**
