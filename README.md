@@ -10,11 +10,16 @@ A modern, self-contained tool that converts Nmap XML scan results into beautiful
 ## Screenshots
 
 Main  
+<p align="center">
 <img width="2117" height="1330" alt="image" src="https://github.com/user-attachments/assets/7f968503-b592-4a11-b237-7552f28214b4" />
+
 
 Host Section  
 <img width="1029" height="1259" alt="image" src="https://github.com/user-attachments/assets/3c1f5606-2f08-4ce7-af61-13830342b241" />
 
+Scan Details  
+<img width="1214" height="1093" alt="image" src="https://github.com/user-attachments/assets/028b574b-324b-4264-981e-ece898adfbb6" />
+</p>
 
 ## Features
 
